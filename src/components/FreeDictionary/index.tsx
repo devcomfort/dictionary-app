@@ -2,7 +2,6 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import { useAsync } from "react-async";
 import TDefinition from "./TDefinition";
-import { v4 } from "uuid";
 
 export interface Phonetic {
 	/** IPA 국제 음성 기호 */
@@ -91,8 +90,10 @@ const FreeDictionaryComponent = function ({ keyword }: { keyword: string }) {
 							console.error(error);
 							return (
 								<tr>
-									<td colSpan={3}>
-										<span className="badge danger">No Data</span> <br />
+									<td>
+										<span className="badge danger">No Data</span>
+									</td>
+									<td colSpan={2}>
 										We are unable to show you the data for the following
 										reasons:
 										<ol>
@@ -115,7 +116,7 @@ const FreeDictionaryComponent = function ({ keyword }: { keyword: string }) {
 								</tr>
 								{data[0].meanings.splice(1).map((w, i) => {
 									return (
-										<tr key={v4()}>
+										<tr>
 											<TDefinition
 												partOfSpeech={w.partOfSpeech}
 												definitions={w.definitions}
