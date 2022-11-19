@@ -2,6 +2,7 @@ import React from "react";
 import Skeleton from "react-loading-skeleton";
 import { useAsync } from "react-async";
 import TDefinition from "./TDefinition";
+import { v4 } from "uuid";
 
 export interface Phonetic {
 	/** IPA 국제 음성 기호 */
@@ -77,33 +78,54 @@ const FreeDictionaryComponent = function ({ keyword }: { keyword: string }) {
 					</tr>
 				</thead>
 				<tbody>
-					{isLoading || error ? (
-						<tr>
-							<td colSpan={3}>
-								<Skeleton />
-							</td>
-						</tr>
-					) : (
-						<>
-							<tr>
-								<td rowSpan={data[0].meanings.length}>{data[0].word}</td>
-								<TDefinition
-									partOfSpeech={data[0].meanings[0].partOfSpeech}
-									definitions={data[0].meanings[0].definitions}
-								></TDefinition>
-							</tr>
-							{data[0].meanings.splice(1).map((w) => {
-								return (
-									<tr>
-										<TDefinition
-											partOfSpeech={w.partOfSpeech}
-											definitions={w.definitions}
-										></TDefinition>
-									</tr>
-								);
-							})}
-						</>
-					)}
+					{(() => {
+						if (isLoading)
+							return (
+								<tr>
+									<td colSpan={3}>
+										<Skeleton />
+									</td>
+								</tr>
+							);
+						if (error) {
+							console.error(error);
+							return (
+								<tr>
+									<td colSpan={3}>
+										<span className="badge danger">No Data</span> <br />
+										We are unable to show you the data for the following
+										reasons:
+										<ol>
+											<li>There is no data in the database.</li>
+											<li>a network issue</li>
+										</ol>
+									</td>
+								</tr>
+							);
+						}
+
+						return (
+							<>
+								<tr>
+									<td rowSpan={data[0].meanings.length}>{data[0].word}</td>
+									<TDefinition
+										partOfSpeech={data[0].meanings[0].partOfSpeech}
+										definitions={data[0].meanings[0].definitions}
+									></TDefinition>
+								</tr>
+								{data[0].meanings.splice(1).map((w, i) => {
+									return (
+										<tr key={v4()}>
+											<TDefinition
+												partOfSpeech={w.partOfSpeech}
+												definitions={w.definitions}
+											></TDefinition>
+										</tr>
+									);
+								})}
+							</>
+						);
+					})()}
 				</tbody>
 			</table>
 		</div>
