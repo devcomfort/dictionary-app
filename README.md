@@ -1,5 +1,7 @@
 # Introduction
 
+[![wakatime](https://wakatime.com/badge/user/6fa74a54-0f52-427a-bdd3-b8a1d9339a79/project/5dd6a9d4-7d92-4a6c-af12-98da91cc1ef5.svg)](https://wakatime.com/badge/user/6fa74a54-0f52-427a-bdd3-b8a1d9339a79/project/5dd6a9d4-7d92-4a6c-af12-98da91cc1ef5)
+
 A comprehensive dictionary integration.
 
 ## Goal
