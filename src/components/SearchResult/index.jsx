@@ -46,12 +46,12 @@ const SearchResult = function ({ result }) {
 	);
 
 	return (
-		<table className="result-table">
+		<>
 			<Rows>
-				<span>결과 번호</span>
-				<span>단어</span>
-				<span>발음 기호 IPA</span>
-				<span>음성</span>
+				<span className={TableCSS.highlight}>결과 번호</span>
+				<span className={TableCSS.highlight}>단어</span>
+				<span className={TableCSS.highlight}>발음 기호 IPA</span>
+				<span className={TableCSS.highlight}>음성</span>
 			</Rows>
 
 			{/* 결과 정보 */}
@@ -98,8 +98,8 @@ const SearchResult = function ({ result }) {
 					</div>
 				);
 			})}
-		</table>
+		</>
 	);
 };
 
-export default SearchResult;
+export default React.memo(SearchResult);

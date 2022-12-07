@@ -9,3 +9,9 @@
 .table th {
   min-width: 7rem;
 }
+
+.highlight {
+  font-weight: bold;
+  font-style: italic;
+  padding: 4px 0 4px 0;
+}
