@@ -25,17 +25,21 @@ function App() {
 
 	/**
 	 * 검색 결과 저장
-	 * @template {import("./assets/Search").FreeDictionaryResult} 검색 결과
+	 * @template {import("./assets/Search").FreeDictionaryResult[]} 검색 결과
 	 */
 	const [result, setResult] = useState([]);
 
 	/** 검색 상태에 대한 옵저버 */
 	useEffect(() => {
 		if (isSearching) {
-			FreeDictionary(keyword)
-				.then((_result) => _result._json())
-				.then((_result) => {
-					setResult(_result);
+			const _k = keyword.split(",").map((k) => k.trim());
+
+			Promise.all(
+				_k.map((k) => FreeDictionary(k).then((_result) => _result._json()))
+			)
+				.then((_results) => {
+					setResult(_results);
+					console.log(_results);
 				})
 				.then(() => setIsSearching(false));
 		}
@@ -55,7 +59,11 @@ function App() {
 				setSearchKeyword={setKeyword}
 				setIsSearching={setIsSearching}
 			></Searchbar>
-			<SearchResult result={result}></SearchResult>
+			<table className="result-table">
+				{result.map((r) => {
+					return <SearchResult result={r}></SearchResult>;
+				})}
+			</table>
 		</div>
 	);
 }
