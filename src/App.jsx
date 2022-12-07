@@ -48,7 +48,7 @@ function App() {
 
 	return (
 		<div className="App container">
-			<h1>dictionary.js</h1>
+			<h1>Dictionary.js</h1>
 			<Searchbar
 				isSearching={isSearching}
 				keyword={keyword}
