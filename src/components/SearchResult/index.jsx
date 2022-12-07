@@ -8,7 +8,6 @@ import AudioControl from "./AudioControl";
 import CollapsibleCard from "../CollapsibleCard";
 import List from "./List";
 
-import styles from "./index.module.css";
 import Rows from "./Rows";
 
 /**
