@@ -59,7 +59,6 @@ const MeaningTable = function ({ meanings }) {
 								</td>
 							</tr>
 						) : null}
-						{/* 단어 예시 */}
 					</>
 				);
 			})}
