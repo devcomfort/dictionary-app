@@ -3,3 +3,7 @@
   flex-direction: column;
   place-items: center;
 }
+
+.list th {
+  min-width: 7rem;
+}
