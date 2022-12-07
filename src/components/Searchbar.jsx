@@ -26,7 +26,7 @@ export default ({ keyword, setSearchKeyword, isSearching, setIsSearching }) => {
 		>
 			<input
 				type="text"
-				placeholder="검색어를 입력해주세요"
+				placeholder="검색어를 입력해주세요 (',' 구분자를 사용해 여러개의 검색어를 입력할 수 있습니다)"
 				disabled={isSearching}
 				value={keyword}
 				onChange={(e) => {
