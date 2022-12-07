@@ -1,4 +1,5 @@
 import React from "react";
+import List from "./List";
 
 import styles from "./Table.module.css";
 
@@ -13,6 +14,9 @@ const MeaningTable = function ({ meanings }) {
 		<>
 			{meanings.map((_meaning) => {
 				const { definitions, partOfSpeech, antonyms, synonyms } = _meaning;
+				const examples = definitions
+					.filter((d) => d.example)
+					.map((d) => d.example);
 				return (
 					<>
 						{/* 단어 분류 */}
@@ -55,6 +59,19 @@ const MeaningTable = function ({ meanings }) {
 								<td className={styles.list}>
 									{synonyms.map((s) => (
 										<span>{s}</span>
+									))}
+								</td>
+							</tr>
+						) : null}
+						{/* 예시 */}
+						{examples.length > 0 ? (
+							<tr>
+								<th>예시</th>
+								<td>
+									{examples.map((e, i) => (
+										<List>
+											{i + 1}. {e}
+										</List>
 									))}
 								</td>
 							</tr>
