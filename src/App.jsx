@@ -1,34 +1,63 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import './App.css'
+// @ts-check
+
+import React, { useState } from "react";
+import { useEffect } from "react";
+
+// PicoCSS
+import "./assets/pico.min.css";
+
+import { FreeDictionary } from "./assets/Search";
+
+import Searchbar from "./components/Searchbar";
+import SearchResult from "./components/SearchResult";
 
 function App() {
-  const [count, setCount] = useState(0)
+	/**
+	 * 검색어 상태 값
+	 * @template {string} 검색어 상태 자료형 지정
+	 */
+	const [keyword, setKeyword] = useState("");
+	/**
+	 * 검색 중 상태 값 ("검색 중인가?"를 기준으로 여러 이벤트를 입히기 위한 상태값)
+	 * @template {boolean} 검색 중 상태 값
+	 */
+	const [isSearching, setIsSearching] = useState(false);
 
-  return (
-    <div className="App">
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src="/vite.svg" className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://reactjs.org" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </div>
-  )
+	/**
+	 * 검색 결과 저장
+	 * @template {import("./assets/Search").FreeDictionaryResult} 검색 결과
+	 */
+	const [result, setResult] = useState([]);
+
+	/** 검색 상태에 대한 옵저버 */
+	useEffect(() => {
+		if (isSearching) {
+			FreeDictionary(keyword)
+				.then((_result) => _result._json())
+				.then((_result) => {
+					setResult(_result);
+				})
+				.then(() => setIsSearching(false));
+		}
+	}, [isSearching]);
+
+	/** 결과 상태 변경 옵저버 */
+	useEffect(() => {
+		console.log(result);
+	}, [result]);
+
+	return (
+		<div className="App container">
+			<h1>dictionary.js</h1>
+			<Searchbar
+				isSearching={isSearching}
+				keyword={keyword}
+				setSearchKeyword={setKeyword}
+				setIsSearching={setIsSearching}
+			></Searchbar>
+			<SearchResult result={result}></SearchResult>
+		</div>
+	);
 }
 
-export default App
+export default App;

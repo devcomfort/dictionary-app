@@ -1,0 +1,14 @@
+.grid-color {
+  border-bottom: 1px solid #eee;
+}
+
+.grid-color>* {
+  border-bottom: 0;
+}
+
+.grid-color>span {
+  line-height: normal;
+  text-align: center;
+  display: flex;
+  place-items: center;
+}

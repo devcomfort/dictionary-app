@@ -1,0 +1,6 @@
+.Searchbar {
+  display: grid;
+  width: 100%;
+  grid-template-columns: 6fr 2fr;
+  grid-gap: 0.5rem;
+}
