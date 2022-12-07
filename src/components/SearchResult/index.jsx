@@ -6,9 +6,10 @@ import { useState } from "react";
 import MeaningTable from "./MeaningTable";
 import AudioControl from "./AudioControl";
 import CollapsibleCard from "../CollapsibleCard";
+import List from "./List";
 
 import styles from "./index.module.css";
-import RowResult from "./RowResult";
+import Rows from "./Rows";
 
 /**
  * @typedef {object} Props
@@ -17,66 +18,64 @@ import RowResult from "./RowResult";
 
 /** @type {React.FC<Props>} */
 const SearchResult = function ({ result }) {
-	const [collapsibleStates, setCollapsibleStates] = useState([]);
-
 	if (result.title)
 		return (
-			<RowResult>
+			<Rows>
 				<span>정보 없음</span>
 				{`(${result.title})`}
-			</RowResult>
+			</Rows>
 		);
 
 	if (!(result instanceof Array))
 		return (
-			<RowResult>
+			<Rows>
 				<span>알 수 없는 자료형</span>
-			</RowResult>
+			</Rows>
 		);
 
 	if (result.length === 0)
 		return (
-			<RowResult>
+			<Rows>
 				<span>결과 없음</span>
-			</RowResult>
+			</Rows>
 		);
+
+	/** @template {boolean[]} */
+	const [resultCollapsedStates, setResultCollapsedStates] = useState(
+		new Array(result.length).fill(false)
+	);
 
 	return (
 		<table className="result-table">
-			<RowResult>
+			<Rows>
 				<span>결과 번호</span>
 				<span>단어</span>
 				<span>발음 기호 IPA</span>
 				<span>음성</span>
-			</RowResult>
+			</Rows>
 
 			{/* 결과 정보 */}
 			{result.map((d, i) => {
 				const { meanings, phonetics, word } = d;
 
 				return (
-					<div>
-						<RowResult>
+					<div
+						onClick={(e) => {
+							e.stopPropagation();
+							setResultCollapsedStates(
+								resultCollapsedStates.map((v, _i) => (_i === i ? !v : v))
+							);
+						}}
+					>
+						<Rows>
 							<span>{i + 1}</span>
 							<span>{word}</span>
-							<span
-								style={{
-									display: "flex",
-									flexDirection: "column",
-									margin: "auto",
-								}}
-							>
-								{phonetics.map((p, i, arr) => (
+							<List>
+								{phonetics.map((p) => (
 									<span>{p.text}</span>
 								))}
-							</span>
-							<span
-								style={{
-									display: "flex",
-									flexDirection: "column",
-									margin: "auto",
-								}}
-							>
+							</List>
+							<List>
 								{phonetics.length === 0 ? (
 									<span>데이터 없음</span>
 								) : (
@@ -89,9 +88,9 @@ const SearchResult = function ({ result }) {
 										);
 									})
 								)}
-							</span>
-						</RowResult>
-						<CollapsibleCard isActive={false}>
+							</List>
+						</Rows>
+						<CollapsibleCard isActive={resultCollapsedStates[i]}>
 							<table>
 								<MeaningTable meanings={meanings}></MeaningTable>
 							</table>
