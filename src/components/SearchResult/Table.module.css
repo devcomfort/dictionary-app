@@ -4,6 +4,8 @@
   place-items: center;
 }
 
-.list th {
+.table {}
+
+.table th {
   min-width: 7rem;
 }

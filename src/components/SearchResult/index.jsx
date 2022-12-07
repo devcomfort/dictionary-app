@@ -7,8 +7,9 @@ import MeaningTable from "./MeaningTable";
 import AudioControl from "./AudioControl";
 import CollapsibleCard from "../CollapsibleCard";
 import List from "./List";
-
 import Rows from "./Rows";
+
+import TableCSS from "./Table.module.css";
 
 /**
  * @typedef {object} Props
@@ -90,7 +91,7 @@ const SearchResult = function ({ result }) {
 							</List>
 						</Rows>
 						<CollapsibleCard isActive={resultCollapsedStates[i]}>
-							<table>
+							<table className={TableCSS.table}>
 								<MeaningTable meanings={meanings}></MeaningTable>
 							</table>
 						</CollapsibleCard>
