@@ -11,8 +11,8 @@ import styles from "./index.module.css";
  * 테이블 '열' 컴포넌트
  * @type {React.FC<React.PropsWithChildren>}
  */
-const RowResult = function ({ children }) {
+const Columns = function ({ children }) {
 	return <div className={`grid ${styles["grid-color"]}`}>{children}</div>;
 };
 
-export default RowResult;
+export default Columns;
