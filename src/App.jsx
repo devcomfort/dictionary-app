@@ -31,6 +31,15 @@ function App() {
 
 	/** 검색 상태에 대한 옵저버 */
 	useEffect(() => {
+		if (!keyword) {
+			if (isSearching) {
+				setResult([]);
+			}
+
+			setIsSearching(false);
+			return;
+		}
+
 		if (isSearching) {
 			const _k = keyword.split(",").map((k) => k.trim());
 
