@@ -69,9 +69,13 @@ function App() {
 				setIsSearching={setIsSearching}
 			></Searchbar>
 			<table className="result-table">
-				{result.map((r) => {
-					return <SearchResult result={r}></SearchResult>;
-				})}
+				{result.length > 0 ? (
+					result.map((r) => {
+						return <SearchResult result={r}></SearchResult>;
+					})
+				) : (
+					<SearchResult result={[]}></SearchResult>
+				)}
 			</table>
 		</div>
 	);
