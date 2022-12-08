@@ -39,3 +39,7 @@ FreeDictionary API 하나를 사용해 데모 버전을 만들었습니다.
     - CollapsibleCard; 검색 결과 중 `word`, `phoentics` 정보를 시각화하는 컴포넌트
       - MeaningTable; 검색 결과 중 `meanings` 정보를 시각화하는 컴포넌트
         - AudioControl; 음성 재생 버튼 컴포넌트 (받아온 데이터에 음성 파일이 있다면, 이를 재생하는 위젯을 표현하기 위해 사용됨)
+
+# 참조
+
+- [[React] ref로 HTML 엘리먼트에 접근/제어하기 - \<DaleSeo\/\>](https://www.daleseo.com/react-refs/)
