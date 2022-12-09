@@ -17,24 +17,24 @@ import TableCSS from "./Table.module.css";
  */
 
 /** @type {React.FC<Props>} */
-const SearchResult = function ({ result }) {
+const SearchResult = function ({ result, ignorable = false }) {
 	if (result.title)
-		return (
+		return ignorable ? null : (
 			<Rows>
-				<span>정보 없음</span>
+				<span>사전 내에 존재하지 않는 단어</span>
 				{`(${result.title})`}
 			</Rows>
 		);
 
 	if (!(result instanceof Array))
-		return (
+		return ignorable ? null : (
 			<Rows>
 				<span>알 수 없는 자료형</span>
 			</Rows>
 		);
 
 	if (result.length === 0)
-		return (
+		return ignorable ? null : (
 			<Rows>
 				<span>결과 없음</span>
 			</Rows>
