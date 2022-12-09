@@ -47,7 +47,11 @@ const SearchResult = function ({ result }) {
 
 	return (
 		<>
-			<Rows>
+			<Rows
+				style={{
+					gridTemplateColumns: "repeat(4, 1fr)",
+				}}
+			>
 				<span className={TableCSS.highlight}>결과 번호</span>
 				<span className={TableCSS.highlight}>단어</span>
 				<span className={TableCSS.highlight}>발음 기호 IPA</span>
